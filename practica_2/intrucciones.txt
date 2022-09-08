@@ -1,0 +1,105 @@
+Vectores y matrices de números racionales
+Objetivo
+La práctica consiste en desarrollar algoritmos para diversas operaciones con números racionales, y vectores y matrices de números racionales. Se trabajará con plantillas, sobrecarga de operadores, y agregación de clases.
+
+Guión
+Se dispone del siguiente material:
+
+Un fichero rational_t.hpp con la definición de la clase número racional.
+
+Un fichero rational_t.cpp con el cuerpo de los métodos de la clase número racional.
+
+Un fichero vector_t.hpp con la definición de la clase plantilla vector.
+
+Un fichero matrix_t.hpp con la definición de la clase plantilla matriz.
+
+Un fichero data.txt con los datos de prueba a cargar.
+
+Un fichero main_p2.cpp con ejemplos de uso de las clases.
+
+Desarrollo
+FASE I. Compresión del material proporcionado e implementación de los operadores aritméticos de rational_t
+Se deben seguir los siguientes pasos:
+
+Descargar los ficheros fuente.
+
+Compilar el proyecto y ejecutarlo usando la re-dirección de la entrada estándar (<) para poder leer los datos del fichero .txt directamente a los objetos.
+
+$  g++ -g rational_t.cpp main_p2.cpp -o main_p2
+$ ./main_p2 < data.txt
+Examinar los ficheros de cabecera identificando los constructores, el destructor, los métodos para acceder a los atributos, los métodos para lectura desde teclado y escritura a pantalla, e identificar los elementos privados y públicos, tanto atributos como métodos. Identificar la sintaxis de las plantillas. Establecer dónde se efectúa la sobrecarga de operadores, determinar qué operadores han sido sobrecargados.
+
+Examinar el fichero main_p2.cpp y comprender la sobrecarga de operadores en la clase rational_t.
+
+Encontrar dentro del fichero vector_t.hpp la operación de producto escalar.
+
+Encontrar dentro del fichero matrix_t.hpp la operación de multiplicación de matrices.
+¿Para qué se sobrecarga el operator[] en la clase vector_t? ¿Qué hace y cómo funciona la sobrecarga del operator() en la clase matrix_t? También debemos entender las cabeceras que representan la sobrecarga del operadores operator<< y operator>>  en la clase rational_t. 
+
+En esta fase se deben implementar los operadores sobrecargados +, -, * y / de la clase rational_t. Más concretamente, se deben desarrollar los siguientes métodos:
+
+rational_t operator+(const rational_t&, const rational_t&);
+rational_t operator-(const rational_t&, const rational_t&);
+rational_t operator*(const rational_t&, const rational_t&);
+rational_t operator/(const rational_t&, const rational_t&);
+FASE II. Desarrollo del producto escalar de la clase vector_t
+Se debe desarrollar el producto escalar de la clase vector_t, en su versión para tipos double como para rational_t:
+
+template<class T>
+T scal_prod(const vector_t<T>& v, const vector_t<T>& w);
+
+double scal_prod(const vector_t<rational_t>& v, const vector_t<rational_t>& w);
+NOTA IMPORTANTE: en ambas versiones, NO usar el operador '+=' para acumular la suma de productos.
+
+FASE III. Desarrollo del producto matricial de la clase matrix_t
+Dada la clase matrix_t, se debe desarrollar el siguiente método:
+
+template<class T>
+void matrix_t<T>::multiply(const matrix_t<T>& A, const matrix_t<T>& B);
+Dicha función implementa la multiplicación de matrices, recibiendo como parámetros dos matrices y almacenando el resultado de la multiplicación en la matriz invocante del método. Para ello, se debe comprobar mediante assert que la dimensión de las matrices a multiplicar son correctas. A continuación se debe redimensionar la matriz invocante con la dimensión apropiada, a partir de las dos matrices a multiplicar. Seguidamente se efectuará el algoritmo de multiplicación matrices. NO se debe utilizar el operador +=, sino el =, + y *.
+
+Dado el fichero de datos data.txt, la salida esperada sería:
+
+a + b: 7/2=3.5
+b - a: 5/2=2.5
+a * b: 3/2=1.5
+a / b: 1/6=0.166667
+
+4: 1.2 2.3 3.4 4.5
+4: 5.6 6.7 7.8 8.9
+Producto escalar de vector_t<double>: 88.7
+
+4: 12/10=1.2
+   23/10=2.3
+   34/10=3.4
+   45/10=4.5
+
+4: 56/10=5.6
+   67/10=6.7
+   78/10=7.8
+   89/10=8.9
+
+Producto escalar de vector_t<rational_t>: 88.7
+
+2x3
+1 2 3
+4 5 6
+
+3x2
+7 8
+9 0
+1 2
+
+Multiplicación de matrices A y B:
+2x2
+28 14
+79 44
+
+Evaluación
+El criterio de evaluación será el siguiente:
+
+Concluir Fase I, y haber resuelto satisfactoriamente la modificación propuesta: 5.0
+
+Concluir Fase I, y II, y haber resuelto satisfactoriamente la modificación propuesta: 7.0
+
+Concluir Fase I, II, y III, y haber resuelto satisfactoriamente la modificación propuesta: 10.0
