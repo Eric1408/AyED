@@ -231,7 +231,6 @@ scal_prod(const vector_t<T>& v, const vector_t<T>& w)
     producto += v[i] * w[i];
   }
 
-
   return producto;
 }
 
