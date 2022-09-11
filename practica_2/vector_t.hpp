@@ -242,8 +242,10 @@ scal_prod(const vector_t<rational_t>& v, const vector_t<rational_t>& w)
   // rellenar código
   double producto = 0;
   for (int i = 0; i < v.get_size() && w.get_size(); ++i) {
-    producto += v[i].multiply(w[i]).value();
-    //std::cout << producto << std::endl;
+    // HAY DOS FORMAS O MAS DE IMPLEMENTARLO
+
+    //producto += v[i].multiply(w[i]).value();
+    producto = producto + (v[i] * w[i]).value();
   }
   
   return producto;
