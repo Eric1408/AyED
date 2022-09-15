@@ -16,7 +16,8 @@
 #include "sll_node_t.h"
 
 // Clase para almacenar una lista simplemente enlazada
-template <class T> class sll_t {
+template <class T>
+class sll_t {
  public:
   // constructor
   sll_t(void) : head_(NULL) {}

@@ -26,8 +26,7 @@ class sparse_vector_t {
  public:
   // constructores
   sparse_vector_t(const int = 0);
-  sparse_vector_t(const vector_t<double>&,
-		  const double = EPS); // constructor normal
+  sparse_vector_t(const vector_t<double>&, const double = EPS); // constructor normal
   sparse_vector_t(const sparse_vector_t&);  // constructor de copia
 
   // operador de asignación

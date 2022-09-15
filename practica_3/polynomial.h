@@ -1,4 +1,4 @@
-// AUTOR: Eric Angueta Rogel 
+ // AUTOR: Eric Angueta Rogel 
 // FECHA: 05/04/2022
 // EMAIL: alu0101335339@ull.edu.es
 // VERSION: 1.0

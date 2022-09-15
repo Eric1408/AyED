@@ -34,7 +34,7 @@ template<class T> class stack_l_t {
   // E/S	
   std::ostream& write(std::ostream& os = std::cout) const;
 
-private:
+ private:
   dll_t<T> l_;
 };
 

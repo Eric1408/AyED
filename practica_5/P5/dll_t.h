@@ -24,6 +24,7 @@ template <class T> class dll_t {
   // destructor
   ~dll_t(void); 
 
+
   // getters
   dll_node_t<T>* get_tail(void) const { return tail_; }
   dll_node_t<T>* get_head(void) const { return head_; }

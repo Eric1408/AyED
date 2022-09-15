@@ -23,7 +23,7 @@ template<class T> class pair_t {
   // destructor
   ~pair_t(void);
             
-      // getters & setters
+  // getters & setters
   T get_val(void) const;
   int get_inx(void) const;
   void set(T, int);

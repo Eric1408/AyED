@@ -108,8 +108,7 @@ double SllPolynomial::Eval(const double x) const {
 }
 
 // Comparación si son iguales dos polinomios representados por listas simples
-bool SllPolynomial::IsEqual(const SllPolynomial& sllpol,
-			    const double eps) const {
+bool SllPolynomial::IsEqual(const SllPolynomial& sllpol, const double eps) const {
   bool differents = false;
   // poner el código aquí
   SllPolyNode* auxiliar(get_head()); 
