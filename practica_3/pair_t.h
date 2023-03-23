@@ -13,24 +13,23 @@
 
 #include <iostream>
 
-
-template<class T> class pair_t {
+template<class T> class PairT {
  public:
   // constructores
-  pair_t(void); 
-  pair_t(T, int);
+  PairT(void); 
+  PairT(T, int);
 
   // destructor
-  ~pair_t(void);
-            
+  ~PairT(void);
+  
   // getters & setters
-  T get_val(void) const;
-  int get_inx(void) const;
-  void set(T, int);
+  T GetVal(void) const;
+  int GetInx(void) const;
+  void Set(T, int);
 
   // E/S
-  std::istream& read(std::istream& is = std::cin);
-  std::ostream& write(std::ostream& os = std::cout) const;
+  std::istream& Read(std::istream& is = std::cin);
+  std::ostream& Write(std::ostream& os = std::cout) const;
 
  private:
   T   val_;
@@ -38,36 +37,35 @@ template<class T> class pair_t {
 };
 
 
-template<class T> pair_t<T>::pair_t() : val_(), inx_(-1) {}
+template<class T> PairT<T>::PairT() : val_(), inx_(-1) {}
 
-template<class T> pair_t<T>::pair_t(T val, int inx) : val_(val), inx_(inx) {}
+template<class T> PairT<T>::PairT(T val, int inx) : val_(val), inx_(inx) {}
 
-template<class T> pair_t<T>::~pair_t() {}
+template<class T> PairT<T>::~PairT() {}
 
-template<class T> void pair_t<T>::set(T val, int inx) {
+template<class T> void PairT<T>::Set(T val, int inx) {
   val_ = val;
   inx_ = inx;
 }
 
-template<class T> int pair_t<T>::get_inx() const {
+template<class T> int PairT<T>::GetInx() const {
   return inx_;
 }
 
-template<class T> T pair_t<T>::get_val() const {
+template<class T> T PairT<T>::GetVal() const {
   return val_;
 }
 
-template<class T> std::istream& pair_t<T>::read(std::istream& is) {
+template<class T> std::istream& PairT<T>::Read(std::istream& is) {
   return is >> inx_ >> val_;
 }
 
-template<class T> std::ostream& pair_t<T>::write(std::ostream& os) const {
+template<class T> std::ostream& PairT<T>::Write(std::ostream& os) const {
   return os << "(" << inx_ << ":" << val_ << ")";
 }
 
-template<class T> std::ostream& operator<<(std::ostream& os,
-					   const pair_t<T>& p) {
-  p.write(os);
+template<class T> std::ostream& operator<<(std::ostream& os, const PairT<T>& p) {
+  p.Write(os);
   return os;
 }
 

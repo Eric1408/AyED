@@ -103,9 +103,9 @@ int main()
   cout << "sp3= " << sp3.GreaterThan(grado);
   cout << endl;
 
-  cout << "sp1= "; sp1.GreaterThan_(grado, sp1);
-  cout << "sp2= "; sp2.GreaterThan_(grado, sp2);
-  cout << "sp3= "; sp3.GreaterThan_(grado, sp3);
+  //cout << "sp1= "; sp1.GreaterThan_(grado, sp1);
+  //cout << "sp2= "; sp2.GreaterThan_(grado, sp2);
+  //cout << "sp3= "; sp3.GreaterThan_(grado, sp3);
 
 
   return 0;

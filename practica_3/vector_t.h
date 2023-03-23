@@ -14,73 +14,76 @@
 #include <iostream>
 #include <cassert>
 
-template<class T> class vector_t {
+template<class T> class VectorT {
  public:
   // constructores
-  vector_t(const int = 0);
-  vector_t(const vector_t&); // constructor de copia
+  VectorT(const int = 0);
+  VectorT(const VectorT&); // constructor de copia
 
   // operador de asignación
-  vector_t<T>& operator=(const vector_t<T>&);
+  VectorT<T>& operator=(const VectorT<T>&);
 
   // destructor
-  ~vector_t();
+  ~VectorT();
   
   // getters
-  T get_val(const int) const;
-  int get_size(void) const;
+  T GetVal(const int) const;
+  int GetSize(void) const;
   
   // setters
-  void set_val(const int, const T);
+  void SetVal(const int, const T);
   
   // getters-setters
-  T& at(const int);
+  T& At(const int);
   T& operator[](const int);
   
   // getters constantes
-  const T& at(const int) const;
+  const T& At(const int) const;
   const T& operator[](const int) const;
 
   // Redimensionado
-  void resize(const int);
+  void Resize(const int);
   
   // E/S
-  void read(std::istream& = std::cin);
-  void write(std::ostream& = std::cout) const;
+  void Read(std::istream& = std::cin);
+  void Write(std::ostream& = std::cout) const;
 
  private:
   T *v_;
   int sz_;
   
-  void build(void);
-  void destroy(void);
+  void Build(void);
+  void Destroy(void);
 };
 
 
-template<class T> vector_t<T>::vector_t(const int n) : v_(NULL), sz_(n) {
-  build();
+/**
+ * @brief Constructor por defecto
+*/
+template<class T> VectorT<T>::VectorT(const int n) : v_(NULL), sz_(n) {
+  Build();
 }
 
 // constructor de copia
-template<class T> vector_t<T>::vector_t(const vector_t<T>& w)
+template<class T> VectorT<T>::VectorT(const VectorT<T>& w)
     : v_(NULL), sz_(0) {
   *this = w; // se invoca directamente al operator=
 }
 
 // operador de asignación
-template<class T> vector_t<T>& vector_t<T>::operator=(const vector_t<T>& w) {
-  resize(w.get_size());
-  for (int i = 0; i < get_size(); i++)
-    at(i) = w.at(i);
+template<class T> VectorT<T>& VectorT<T>::operator=(const VectorT<T>& w) {
+  Resize(w.GetSize());
+  for (int i = 0; i < GetSize(); i++)
+    At(i) = w.At(i);
   
   return *this;
 }
 
-template<class T> vector_t<T>::~vector_t() {
-  destroy();
+template<class T> VectorT<T>::~VectorT() {
+  Destroy();
 }
 
-template<class T> void vector_t<T>::build() {
+template<class T> void VectorT<T>::Build() {
   v_ = NULL;
   if (sz_ != 0) {
     v_ = new T[sz_];
@@ -88,7 +91,7 @@ template<class T> void vector_t<T>::build() {
   }
 }
 
-template<class T> void vector_t<T>::destroy() {
+template<class T> void VectorT<T>::Destroy() {
   if (v_ != NULL) {
     delete[] v_;
     v_ = NULL;
@@ -96,66 +99,65 @@ template<class T> void vector_t<T>::destroy() {
   sz_ = 0;
 }
 
-template<class T> void vector_t<T>::resize(const int n) {
-  destroy();
+template<class T> void VectorT<T>::Resize(const int n) {
+  Destroy();
   sz_ = n;
-  build();
+  Build();
 }
 
-template<class T> inline T vector_t<T>::get_val(const int i) const {
-  assert(i >= 0 && i < get_size());
+template<class T> inline T VectorT<T>::GetVal(const int i) const {
+  assert(i >= 0 && i < GetSize());
   return v_[i];
 }
 
-template<class T> inline int vector_t<T>::get_size() const {
+template<class T> inline int VectorT<T>::GetSize() const {
   return sz_;
 }
 
-template<class T> void vector_t<T>::set_val(const int i, const T d) {
-  assert(i >= 0 && i < get_size());
+template<class T> void VectorT<T>::SetVal(const int i, const T d) {
+  assert(i >= 0 && i < GetSize());
   v_[i] = d;
 }
 
-template<class T> T& vector_t<T>::at(const int i) {
-  assert(i >= 0 && i < get_size());
+template<class T> T& VectorT<T>::At(const int i) {
+  assert(i >= 0 && i < GetSize());
   return v_[i];
 }
 
-template<class T> T& vector_t<T>::operator[](const int i) {
-  return at(i);
+template<class T> T& VectorT<T>::operator[](const int i) {
+  return At(i);
 }
 
-template<class T> const T& vector_t<T>::at(const int i) const {
-  assert(i >= 0 && i < get_size());
+template<class T> const T& VectorT<T>::At(const int i) const {
+  assert(i >= 0 && i < GetSize());
   return v_[i];
 }
 
-template<class T> const T& vector_t<T>::operator[](const int i) const {
-  return at(i);
+template<class T> const T& VectorT<T>::operator[](const int i) const {
+  return At(i);
 }
 
-template<class T> void vector_t<T>::read(std::istream& is) {
+template<class T> void VectorT<T>::Read(std::istream& is) {
   is >> sz_;
-  resize(sz_);
+  Resize(sz_);
   for (int i = 0; i < sz_; i++)
-    is >> at(i);
+    is >> At(i);
 }
 
-template<class T> void vector_t<T>::write(std::ostream& os) const {
-  os << get_size() << ": [ ";
-  for (int i = 0; i < get_size(); i++)
-    os << at(i) << (i != get_size() - 1 ? "\t" : "");
+template<class T> void VectorT<T>::Write(std::ostream& os) const {
+  os << GetSize() << ": [ ";
+  for (int i = 0; i < GetSize(); i++)
+    os << At(i) << (i != GetSize() - 1 ? "\t" : "");
   os << " ]" << std::endl;
 }
 
-template<class T> std::istream& operator>>(std::istream& is, vector_t<T>& v) {
-  v.read(is);
+template<class T> std::istream& operator>>(std::istream& is, VectorT<T>& v) {
+  v.Read(is);
   return is;
 }
 
-template<class T> std::ostream& operator<<(std::ostream& os,
-					   const vector_t<T>& v) {
-  v.write(os);
+template<class T> std::ostream& operator<<(std::ostream& os, const VectorT<T>& v) {
+  v.Write(os);
   return os;
 }
 
