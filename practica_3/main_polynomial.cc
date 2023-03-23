@@ -26,11 +26,18 @@ int main()
   cout << endl;
 
   // Fase II
+  double x{3.6};
   SparsePolynomial sp1(p1), sp2(p2), sp3(p3);
   cout << "sp1= " << sp1;
+  sp1.DumpM(x);
   cout << "sp2= " << sp2;
+  sp2.DumpM(x);
   cout << "sp3= " << sp3;
+  sp3.DumpM(x);
   cout << endl;
+
+  // Modificacion
+
 
   // Fase III
   double x1, x2, x3;
@@ -90,23 +97,7 @@ int main()
   cout << "sp2 == p3? " << (sp2.IsEqual(p3) ? "true" : "false") << endl;
   cout << "sp3 == p2? " << (sp3.IsEqual(p2) ? "true" : "false") << endl;
   cout << endl;
-
-
-  //MODIF
-  int grado;
-  cout << "Introduzca el grado: ";
-  cin >> grado;
-  cout << endl;
-
-  cout << "sp1= " << sp1.GreaterThan(grado);
-  cout << "sp2= " << sp2.GreaterThan(grado);
-  cout << "sp3= " << sp3.GreaterThan(grado);
-  cout << endl;
-
-  //cout << "sp1= "; sp1.GreaterThan_(grado, sp1);
-  //cout << "sp2= "; sp2.GreaterThan_(grado, sp2);
-  //cout << "sp3= "; sp3.GreaterThan_(grado, sp3);
-
+  
 
   return 0;
 }

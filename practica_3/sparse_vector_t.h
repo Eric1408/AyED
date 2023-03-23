@@ -67,6 +67,15 @@ bool IsNotZero(const double val, const double eps = EPS) {
 SparseVectorT::SparseVectorT(const int n) : pv_(n), nz_(0), n_(n) {}
 
 // FASE II
+/**
+ * @brief Constructor normal
+ * @param v Vector de valores reales
+ * @param eps Valor de tolerancia para considerar un valor como cero
+ * @pre v debe tener al menos un elemento 
+ * @post Se crea un vector disperso a partir de un vector de valores reales
+ * @post Se eliminan los valores cuyo módulo sea menor que eps
+ * @post Se almacenan los valores y sus índices en el vector pv_
+*/
 SparseVectorT::SparseVectorT(const VectorT<double>& v, const double eps) : pv_(), nz_(0), n_(0) {
   n_ = v.GetSize();
 
@@ -94,6 +103,15 @@ SparseVectorT::SparseVectorT(const SparseVectorT& w) {
 }
 
 // operador de asignación
+/**
+ * @brief Operador de asignación
+ * @param w Vector disperso a copiar
+ * @pre w debe tener al menos un elemento
+ * @post Se copia el vector w en el vector actual
+ * @return Devuelve el vector actual
+ * @note Se invoca directamente al constructor de copia, se utilza el operador
+ * de asignación para que sea mas legible el codigo, en lugar de usar el constructor
+*/
 SparseVectorT& SparseVectorT::operator=(const SparseVectorT& w) {
   nz_ = w.GetNZ();
   n_ = w.GetN();
@@ -117,6 +135,15 @@ PairDoubleT& SparseVectorT::At(const int i) {
   return pv_[i];
 }
 
+/**
+ * @brief Sobrecarga del operador []
+ * @param i Índice del elemento a acceder
+ * @pre i debe ser un índice válido
+ * @post Se accede al elemento del vector en la posición i
+ * @return Devuelve el elemento del vector en la posición i
+ * @note Se invoca directamente al método At, y se sobrecarga para que
+ * el codigo sea mas legible, aunque es lo mismo que usar At
+*/
 PairDoubleT& SparseVectorT::operator[](const int i) {
   return At(i);
 }

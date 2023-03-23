@@ -55,43 +55,19 @@ class SparsePolynomial : public SparseVectorT {
   double Eval(const double) const;
   bool IsEqual(const SparsePolynomial&, const double = EPS) const;
   bool IsEqual(const Polynomial&, const double = EPS) const;
-  SparsePolynomial GreaterThan(const int) const;
-  //void GreaterThan_(int, const SparsePolynomial&);
+  void DumpM(double);
 };
 
 //MODIFICACION
-SparsePolynomial SparsePolynomial::GreaterThan(const int number) const {
-  SparsePolynomial result(*this);
-  int k = 0;
-  
-  for (int i = 0; i < GetNZ(); ++i) {
-    result.At(i).Set(0.0, 0);
-    
-  }
 
-  for(int i = 0; i < GetNZ(); ++i) {
-    if (At(i).GetInx() > number) {
-      result.At(k).Set(At(i).GetVal(), At(i).GetInx());
-      ++k;
+void SparsePolynomial::DumpM(double x) {
+  for (int i = 0; i < GetNZ(); ++i) {
+    if (At(i).GetVal() > x) {
+      std::cout << At(i).GetVal() << " ";
     }
   }
-
-  return result;
+  std::cout << std::endl;
 }
-
-//void SparsePolynomial::GreaterThan_(int number, const SparsePolynomial& pol) {
-//    std::cout << get_n() << "(" << GetNZ() << "): [ ";
-//    bool first{true};
-//    for (int i{number -1}; i < GetNZ(); i++) {
-//      int inx{At(i).GetInx()};
-//      std::cout << (!first ? " + " : "") << At(i).GetVal()
-//         << (inx > 1 ? " x^" : (inx == 1) ? " x" : "");
-//      if (inx > 1)
-//        std::cout << inx;
-//      first = false;
-//    }
-//    std::cout << " ]" << std::endl;
-//}
 
 // E/S
 void Polynomial::Write(std::ostream& os, const double eps) const {
@@ -114,7 +90,15 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& p) {
 
 // Operaciones con polinomios
 
-// Evaluación de un polinomio representado por vector denso
+/**
+ * @brief Evalúa un polinomio en un punto x
+ * @param x Punto en el que se evalúa el polinomio
+ * @return Valor del polinomio en el punto x
+ * @pre El polinomio debe estar inicializado
+ * @post El polinomio no se modifica
+ * @post El valor devuelto es el resultado de evaluar el polinomio en el punto x
+ * 
+*/
 double Polynomial::Eval(const double x) const {
   double result{0.0};
   // poner el código aquí
@@ -156,8 +140,7 @@ void SparsePolynomial::Write(std::ostream& os) const {
   bool first{true};
   for (int i{0}; i < GetNZ(); i++) {
     int inx{At(i).GetInx()};
-    os << (!first ? " + " : "") << At(i).GetVal()
-       << (inx > 1 ? " x^" : (inx == 1) ? " x" : "");
+    os << (!first ? " + " : "") << At(i).GetVal() << (inx > 1 ? " x^" : (inx == 1) ? " x" : "");
     if (inx > 1)
       os << inx;
     first = false;
@@ -172,7 +155,15 @@ std::ostream& operator<<(std::ostream& os, const SparsePolynomial& p) {
 
 // Operaciones con polinomios
 
-// Evaluación de un polinomio representado por vector disperso
+/**
+ * @brief Evalúa un polinomio en un punto x
+ * @param x Punto en el que se evalúa el polinomio
+ * @return Valor del polinomio en el punto x
+ * @pre El polinomio debe estar inicializado
+ * @post El polinomio no se modifica
+ * @post El valor devuelto es el resultado de evaluar el polinomio en el punto x
+ * 
+*/
 double SparsePolynomial::Eval(const double x) const {
   double result{0.0};
   // poner el código aquí
@@ -184,8 +175,7 @@ double SparsePolynomial::Eval(const double x) const {
 }
 
 // Comparación si son iguales dos polinomios representados por vectores dispersos
-bool SparsePolynomial::IsEqual(const SparsePolynomial& spol
-			       , const double eps) const {
+bool SparsePolynomial::IsEqual(const SparsePolynomial& spol, const double eps) const {
   bool differents = false;
   // poner el código aquí
   int size{0};
