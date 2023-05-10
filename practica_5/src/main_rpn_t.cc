@@ -25,22 +25,23 @@
 using namespace std;
 
 int main(void) {
-  rpn_t<stack_l_t<int>> calculadora;
-  queue_l_t<char> cola;
+  RPN<Stack<int>> calculadora;
+  Queue<char> cola;
 	
   while (!cin.eof()) 	{
     cin >> ws; // lee los espacios en blanco, que dan problemas
     if (!cin.eof()) {
       char c;
       cin >> c;
-      cola.push(c);
+      cola.Push(c);
     }
   }
 
   cout << "Expresión a evaluar: ";	
-  cola.write();
+  cola.Write();
+  
 
-  int r = calculadora.evaluate(cola);
+  int r = calculadora.Evaluate(cola);
   cout << "Resultado: " << r << endl;
 
   return 0;

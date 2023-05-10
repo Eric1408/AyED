@@ -1,5 +1,5 @@
 // AUTOR: Eric Angueta Rogel 
-// FECHA: 05/04/2022
+// FECHA: 16/04/2023
 // EMAIL: alu0101335339@ull.edu.es
 // VERSION: 4.0
 // ASIGNATURA: Algoritmos y Estructuras de Datos
@@ -19,39 +19,40 @@
 
 #define EPS 1.0e-6
 
-typedef pair_t<double> pair_double_t;
-typedef vector_t<pair_double_t> pair_vector_t;
+typedef PairT<double> PairDoubleT;
+typedef VectorT<PairDoubleT> PairVectorT;
 
-class sparse_vector_t {
+class SparseVectorT {
  public:
   // constructores
-  sparse_vector_t(const int = 0);
-  sparse_vector_t(const vector_t<double>&, const double = EPS); // constructor normal
-  sparse_vector_t(const sparse_vector_t&);  // constructor de copia
+  SparseVectorT(const int = 0);
+  SparseVectorT(const VectorT<double>&, 
+  const double = EPS); // constructor normal
+  SparseVectorT(const SparseVectorT&);  // constructor de copia
 
   // operador de asignación
-  sparse_vector_t& operator=(const sparse_vector_t&);
+  SparseVectorT& operator=(const SparseVectorT&);
 
   // destructor
-  ~sparse_vector_t();
+  ~SparseVectorT();
   
   // getters
-  int get_nz(void) const;
-  int get_n(void) const;
+  int GetNZ(void) const;
+  int GetN(void) const;
 
   // getters-setters
-  pair_double_t& at(const int);
-  pair_double_t& operator[](const int);
+  PairDoubleT& At(const int);
+  PairDoubleT& operator[](const int);
   
   // getters constantes
-  const pair_double_t& at(const int) const;
-  const pair_double_t& operator[](const int) const;
+  const PairDoubleT& At(const int) const;
+  const PairDoubleT& operator[](const int) const;
 
   // E/S
-  void write(std::ostream& = std::cout) const;
+  void Write(std::ostream& = std::cout) const;
 
  private:
-  pair_vector_t pv_;  // valores + índices
+  PairVectorT pv_;  // valores + índices
   int nz_;            // nº de valores distintos de cero = tamaño del vector
   int n_;             // tamaño del vector original
 
@@ -60,30 +61,36 @@ class sparse_vector_t {
 
 
 bool IsNotZero(const double val, const double eps = EPS) {
-  return fabs(val
-  ) > eps;
+  return fabs(val) > eps;
 }
 
-sparse_vector_t::sparse_vector_t(const int n) : pv_(n), nz_(0), n_(n) {}
+SparseVectorT::SparseVectorT(const int n) : pv_(n), nz_(0), n_(n) {}
 
 // FASE II
-sparse_vector_t::sparse_vector_t(const vector_t<double>& v, const double eps)
-    : pv_(), nz_(0), n_(0) {
-  // poner el código aquí
-  n_ = v.get_size();
+/**
+ * @brief Constructor normal
+ * @param v Vector de valores reales
+ * @param eps Valor de tolerancia para considerar un valor como cero
+ * @pre v debe tener al menos un elemento 
+ * @post Se crea un vector disperso a partir de un vector de valores reales
+ * @post Se eliminan los valores cuyo módulo sea menor que eps
+ * @post Se almacenan los valores y sus índices en el vector pv_
+*/
+SparseVectorT::SparseVectorT(const VectorT<double>& v, const double eps) : pv_(), nz_(0), n_(0) {
+  n_ = v.GetSize();
 
-  for (int i = 0; i < v.get_size(); ++i) {
+  for (int i = 0; i < v.GetSize(); ++i) {
     if (v[i] != 0) {
       nz_++;
     }
   }
 
-  pv_.resize(nz_);
+  pv_.Resize(nz_);
 
   int k = 0;
-  for (int i = 0; i < v.get_size(); i++) {
+  for (int i = 0; i < v.GetSize(); i++) {
     if (v[i] != 0) {
-      pair_double_t aux(v.get_val(i), i);
+      PairDoubleT aux(v.GetVal(i), i);
       pv_[k] = aux;
       k++;
     }
@@ -91,57 +98,75 @@ sparse_vector_t::sparse_vector_t(const vector_t<double>& v, const double eps)
 }
 
 // constructor de copia
-sparse_vector_t::sparse_vector_t(const sparse_vector_t& w) {
+SparseVectorT::SparseVectorT(const SparseVectorT& w) {
   *this = w;  // se invoca directamente al operator=
 }
 
 // operador de asignación
-sparse_vector_t& sparse_vector_t::operator=(const sparse_vector_t& w) {
-  nz_ = w.get_nz();
-  n_ = w.get_n();
+/**
+ * @brief Operador de asignación
+ * @param w Vector disperso a copiar
+ * @pre w debe tener al menos un elemento
+ * @post Se copia el vector w en el vector actual
+ * @return Devuelve el vector actual
+ * @note Se invoca directamente al constructor de copia, se utilza el operador
+ * de asignación para que sea mas legible el codigo, en lugar de usar el constructor
+*/
+SparseVectorT& SparseVectorT::operator=(const SparseVectorT& w) {
+  nz_ = w.GetNZ();
+  n_ = w.GetN();
   pv_ = w.pv_;
 
   return *this;
 }
 
-sparse_vector_t::~sparse_vector_t() {}
+SparseVectorT::~SparseVectorT() {}
 
-inline int sparse_vector_t::get_nz() const {
+inline int SparseVectorT::GetNZ() const {
   return nz_;
 }
 
-inline int sparse_vector_t::get_n() const {
+inline int SparseVectorT::GetN() const {
   return n_;
 }
 
-pair_double_t& sparse_vector_t::at(const int i) {
-  assert(i >= 0 && i < get_nz());
+PairDoubleT& SparseVectorT::At(const int i) {
+  assert(i >= 0 && i < GetNZ());
   return pv_[i];
 }
 
-pair_double_t& sparse_vector_t::operator[](const int i) {
-  return at(i);
+/**
+ * @brief Sobrecarga del operador []
+ * @param i Índice del elemento a acceder
+ * @pre i debe ser un índice válido
+ * @post Se accede al elemento del vector en la posición i
+ * @return Devuelve el elemento del vector en la posición i
+ * @note Se invoca directamente al método At, y se sobrecarga para que
+ * el codigo sea mas legible, aunque es lo mismo que usar At
+*/
+PairDoubleT& SparseVectorT::operator[](const int i) {
+  return At(i);
 }
 
-const pair_double_t& sparse_vector_t::at(const int i) const {
-  assert(i >= 0 && i < get_nz());
+const PairDoubleT& SparseVectorT::At(const int i) const {
+  assert(i >= 0 && i < GetNZ());
   return pv_[i];
 }
 
-const pair_double_t& sparse_vector_t::operator[](const int i) const {
-  return at(i);
+const PairDoubleT& SparseVectorT::operator[](const int i) const {
+  return At(i);
 }
 
 // E/S
-void sparse_vector_t::write(std::ostream& os) const { 
-  os << get_n() << "(" << get_nz() << "): [ ";
-  for (int i = 0; i < get_nz(); i++)
+void SparseVectorT::Write(std::ostream& os) const { 
+  os << GetN() << "(" << GetNZ() << "): [ ";
+  for (int i = 0; i < GetNZ(); i++)
     os << pv_[i] << " ";
 	os << "]" << std::endl;
 }
 
-std::ostream& operator<<(std::ostream& os, const sparse_vector_t& sv) {
-  sv.write(os);
+std::ostream& operator<<(std::ostream& os, const SparseVectorT& sv) {
+  sv.Write(os);
   return os;
 }
 
