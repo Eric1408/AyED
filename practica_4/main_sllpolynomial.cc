@@ -1,4 +1,4 @@
-// AUTOR: 
+ // AUTOR: 
 // FECHA: 
 // EMAIL: 
 // VERSION: 1.0
@@ -79,5 +79,9 @@ int main()
   sllp2.Diferencia(sllp3, sllpdif23);
   cout << "sllp2 - sllp3= " << sllpdif23;
 
+  // EXAMEN JUNIO 2021
+  sll_t<double> example;
+  
+  
   return 0;
 }

@@ -42,10 +42,53 @@ class sll_t {
   // E/S
   std::ostream& write(std::ostream& = std::cout) const;
 
+  // EXAMEN JUNIO 2021
+  void PushSorted(sll_node_t<T>*);
+  // EXAMEN JULIO 2021
+  void Sort(void);
+
  private:
   sll_node_t<T>* head_;
 };
 
+// EXAMEN JULIO 2021
+template <class T>
+void sll_t<T>::Sort(void) {
+  if (empty()) return;
+  sll_node_t<T>* aux = head_;
+  sll_node_t<T>* node;
+  aux = aux->get_next();
+  while (aux->get_next() != NULL) {
+    if (aux->get_next()->get_data() < aux->get_data()) {
+      node = aux->get_next;
+      aux = aux->set_next(node->get_next());
+      PushSorted(node);
+      aux = node;
+    } else aux = aux->get_next();
+  }
+}
+
+// EXAMEN JUNIO 2021
+template <class T>
+void sll_t<T>::PushSorted(sll_node_t<T>* n) {
+  sll_node_t<T>* aux1 = head_;
+  sll_node_t<T>* prev = head_->get_next();
+  
+  if (aux1->get_data() >= n->get_data()) {
+    push_front(n);
+    return;
+  }
+  aux1 = aux1->get_next();
+  while (aux1 != NULL) {
+    if (aux1->get_data() >= n->get_data()) {
+      insert_after(prev, n);
+      return;
+    }
+    prev = aux1;
+    aux1 = aux1->get_next();
+  }
+  insert_after(prev, n);
+}
 
 // destructor
 template <class T> sll_t<T>::~sll_t(void) {

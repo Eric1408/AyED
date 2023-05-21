@@ -69,6 +69,17 @@ int main()
   C.multiply(A, B);
   cout << "Multiplicación de matrices A y B: " << endl;
   C.write();
+
+  // EXAMEN JUNIO 2021
+  vector_t<char> example;
+  example.read();
+  example.write();
+  example.IsPal(example, 0, example.get_size()) ? cout << "Is Pal\n" : cout << "Is not Pal\n";
+
+  // EXAMEN JULIO 2021
+  A.IsSimetric() ? cout << "Is Simetric\n" : cout << "Is not Simetric\n";
+  B.IsSimetric() ? cout << "Is Simetric\n" : cout << "Is not Simetric\n";
+  C.IsSimetric() ? cout << "Is Simetric\n" : cout << "Is not Simetric\n";
   
   return 0;
 }

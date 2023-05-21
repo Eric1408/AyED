@@ -1,6 +1,6 @@
-// AUTOR: Lihao Zhu
-// FECHA: 26/05/2022
-// EMAIL: alu0101412580@ull.edu.es
+// AUTOR: 
+// FECHA: 
+// EMAIL: 
 // VERSION: 1.0
 // ASIGNATURA: Algoritmos y Estructuras de Datos
 // PRÁCTICA Nº: 6
@@ -79,6 +79,7 @@ maze_t::read(istream& is)
 }
 
 
+
 // muestra el laberinto por pantalla
 ostream&
 maze_t::write(ostream& os) const
@@ -111,9 +112,13 @@ maze_t::is_ok_(const int i, const int j) const
   // retornar true si se cumplen TODAS estas condiciones:
   // - fila i y la columna j están dentro de los límites del laberinto,
   // - la celda en (i, j) no puede ser un muro,
-  // - la celda (i, j) no puede haber sido visitada antes.a
-  if (i >= 1 && i <= matrix_.get_m() && j >= 1 && j <= matrix_.get_n() && matrix_(i, j) != WALL_ID && visited_(i, j) != true) return true;
-  else return false;
+  // - la celda (i, j) no puede haber sido visitada antes.
+  if (i >= 1 && i <= matrix_.get_m() && j >= 1 && j <= matrix_.get_n()) {
+    if (matrix_(i,j) != WALL_ID && !visited_(i,j))
+      return true;
+  }  
+
+  return false;
 }
 
 
@@ -125,8 +130,9 @@ maze_t::solve_(const int i, const int j)
 {
   // CASO BASE:
   // retornar 'true' si 'i' y 'j' han llegado a la salida
-  if (matrix_(i, j) == END_ID) return true;
 
+  // [poner código aquí]
+  if (matrix_(i,j) == END_ID) return true;
   // marcamos la celda como visitada
   visited_(i, j) = true;
   
@@ -137,52 +143,16 @@ maze_t::solve_(const int i, const int j)
   // Si la llamada devuelve 'true', poner en la celda el valor PATH_ID, y
   // propagarla retornando también 'true'
 
-  // if (is_ok_(i + i_d[N], j + j_d[N]) == true) {
-  //   if (solve_(i + i_d[N], j + j_d[N]) == true) {
-  //     matrix_(i + i_d[N], j + j_d[N]) = PATH_ID;
-  //     return true;
-  //   }
-  // }
-  // if (is_ok_(i + i_d[E], j + j_d[E]) == true) {
-  //   if (solve_(i + i_d[E], j + j_d[E]) == true) {
-  //     matrix_(i + i_d[E], j + j_d[E]) = PATH_ID;
-  //     return true;
-  //   }
-  // }
-  // if (is_ok_(i + i_d[S], j + j_d[S]) == true) {
-  //   if (solve_(i + i_d[S], j + j_d[S]) == true) {
-  //     matrix_(i + i_d[S], j + j_d[S]) = PATH_ID;
-  //     return true;
-  //   }
-  // }
-  // if (is_ok_(i + i_d[W], j + j_d[W]) == true) {
-  //   if (solve_(i + i_d[W], j + j_d[W]) == true) {
-  //     matrix_(i + i_d[W], j + j_d[W]) = PATH_ID;
-  //     return true;
-  //   }
-  // }
-  // if (is_ok_(i + i_d[SE], j + j_d[SE]) == true) {
-  //   if (solve_(i + i_d[SE], j + j_d[SE]) == true) {
-  //     matrix_(i + i_d[SE], j + j_d[SE]) = PATH_ID;
-  //     return true;
-  //   }
-  // }
-  // if (is_ok_(i + i_d[SW], j + j_d[SW]) == true) {
-  //   if (solve_(i + i_d[SW], j + j_d[SW]) == true) {
-  //     matrix_(i + i_d[SW], j + j_d[SW]) = PATH_ID;
-  //     return true;
-  //   }
-  // }
 
-  for(int k = 0; k < 6; k++) {
-    if(is_ok_(i + i_d[k], j + j_d[k])) {
+  for (int k = 0; k < 6; k++) {
+    if (is_ok_(i + i_d[k], j + j_d[k])) {
       if (solve_(i + i_d[k], j + j_d[k])) {
         matrix_(i + i_d[k], j + j_d[k]) = PATH_ID;
         return true;
       }
     }
   }
-
+  
   // desmarcamos la celda como visitada (denominado "backtracking") y
   // retornamos 'false'
   visited_(i, j) = false;

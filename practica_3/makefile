@@ -1,10 +1,10 @@
 CC=g++
 CFLAGS=-c -Wall
 LDFLAGS=
-SOURCES=main_maze_t.cpp maze_t.cpp 
+SOURCES=main_polynomial.cc
 HEADERS=maze_t.hpp 
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=main_maze_t
+EXECUTABLE=main
 
 all: $(SOURCES) $(EXECUTABLE)
     
@@ -15,4 +15,4 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -f $(EXECUTABLE) $(OBJECTS)
+	rm -f $(EXECUTABLE)  

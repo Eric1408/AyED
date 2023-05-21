@@ -1,6 +1,6 @@
-// AUTOR: Lihao Zhu
-// FECHA: 26/05/2022
-// EMAIL: alu0101412580@ull.edu.es
+// AUTOR: 
+// FECHA: 
+// EMAIL: 
 // VERSION: 1.0
 // ASIGNATURA: Algoritmos y Estructuras de Datos
 // PRÁCTICA Nº: 6
@@ -12,7 +12,6 @@
 
 #include <iostream>
 #include "matrix_t.hpp"
-
 
 #define TRACE(x) cout << (#x) << "= " << (x) << endl
 
@@ -41,12 +40,12 @@ typedef matrix_t<short> matrix_t_short;
 typedef matrix_t<bool> matrix_t_bool;
 
 // enumera las direcciones Norte, Este, Sur y Oeste (West)
-enum direction_t {N, E, S, W, SE, SW};
+enum direction_t {N, E, S, W};
 
-// define vectores de desplazamiento en las 6 direcciones:
-//                    N   E  S   W SE  SW
-const short i_d[] = { -1, 0, 1,  0, 1, 1};
-const short j_d[] = {  0, 1, 0, -1, 1, -1};
+// define vectores de desplazamiento en las 4 direcciones:
+//                    N   E  S   W
+const short i_d[] = { -1, 0, 1,  0};
+const short j_d[] = {  0, 1, 0, -1};
 
 
 class maze_t 

@@ -1,6 +1,6 @@
-// AUTOR: Lihao Zhu
-// FECHA: 26/05/2022
-// EMAIL: alu0101412580@ull.edu.es
+// AUTOR: 
+// FECHA: 
+// EMAIL: 
 // VERSION: 1.0
 // ASIGNATURA: Algoritmos y Estructuras de Datos
 // PRÁCTICA Nº: 6

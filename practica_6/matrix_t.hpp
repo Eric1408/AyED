@@ -1,7 +1,7 @@
-// AUTOR: Lihao Zhu
-// FECHA: 26/05/2022
-// EMAIL: alu0101412580@ull.edu.es
-// VERSION: 1.0
+// AUTOR: 
+// FECHA: 
+// EMAIL: 
+// VERSION: 2.0
 // ASIGNATURA: Algoritmos y Estructuras de Datos
 // PRÁCTICA Nº: 4
 // COMENTARIOS: se indican entre [] las pautas de estilo aplicadas de

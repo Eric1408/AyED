@@ -47,6 +47,21 @@ class SparseVectorT {
   // getters constantes
   const PairDoubleT& At(const int) const;
   const PairDoubleT& operator[](const int) const;
+  // EXAMEN JUNIO 2021
+  friend double operator*(const SparseVectorT& a, const SparseVectorT& b) {
+    assert(a.GetN() == b.GetN());
+    unsigned i{0}, j{0};
+    double result{0};
+    while (i < a.GetNZ() && j < b.GetNZ()) {
+      if (a[i].GetInx() == b[j].GetInx()) {
+        result += a[i++].GetVal() * b[j++].GetVal();
+      } else if (a[i].GetInx() < b[j].GetInx()) {
+        i++;
+      } else j++;
+    }
+
+    return result;
+  } 
 
   // E/S
   void Write(std::ostream& = std::cout) const;

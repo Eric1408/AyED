@@ -46,6 +46,9 @@ public:
   void write(ostream& = cout) const;
   void read(istream& = cin);
 
+  // EXAMEN JULIO 2021
+  bool IsSimetric(void) const;
+ 
 private:
   int m_, n_; // m_ filas y n_ columnas
   vector_t<T> v_; 
@@ -53,7 +56,17 @@ private:
   int pos(const int, const int) const;
 };
 
+// EXAMEN JULIO 2021
+template <class T>
+bool matrix_t<T>::IsSimetric(void) const {
+  for (unsigned i = 1; i <= get_m()-1; i++) {
+    for (unsigned j = i + 1; j <= get_n(); j++) {
+      if (at(i,j) != at(j,i)) return false;
+    }
+  }
 
+  return true;
+}
 
 //Constructor
 template<class T>

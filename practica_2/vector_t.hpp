@@ -48,6 +48,8 @@ public:
   // Mod
   vector_t<T> Pass(const vector_t<T>&) const;
 
+  // EXAMEN JUNIO 2021
+  bool IsPal(const vector_t<T>&, int, int);
 private:
   T* v_;
   int sz_;
@@ -56,6 +58,13 @@ private:
   void destroy(void);
 };
 
+// EXAMEN JUNIO 2021
+template<class T>
+bool vector_t<T>::IsPal(const vector_t<T>& str, int left, int right) {
+  if (right - left < 1) return true;
+  else if (str[left++] == str[--right]) return IsPal(str, left, right);
+  else return false; 
+}
 
 // Mod
 template<class T>

@@ -97,7 +97,12 @@ int main()
   cout << "sp2 == p3? " << (sp2.IsEqual(p3) ? "true" : "false") << endl;
   cout << "sp3 == p2? " << (sp3.IsEqual(p2) ? "true" : "false") << endl;
   cout << endl;
-  
+
+  // EXAMEN JUNIO 2021
+  cout << "===== Examen Junio 2021 =====\n";
+  cout << "sp1 * sp3 = " << sp1 * sp3 << endl;
+  cout << "sp1 * sp2 = " << sp1 * sp2 << endl;
+
 
   return 0;
 }
